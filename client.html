@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WebSockets in Go with Gorilla toolkit</title>
+  </head>
+  <body>
+    <h2>WebSockets with Go chat application</h2>
+    <p>
+      (Clever name, I know...)
+    </p>
+
+    <!-- UI forked from the excellent demo at https://gowebexamples.com/websockets/, with JavaScript modified to ECMAScript 6 -->
+    <input type="text" id="input"/>
+    <button onclick="chat()">send</button>
+    <pre id="output"></pre>
+    <script type="text/javascript">
+      var input = document.getElementById("input");
+      var output = document.getElementById("output");
+      var ws = new WebSocket("ws://127.0.0.1:5309/ws");
+
+      ws.onopen = () => { output.innerHTML += "STATUS: [connected]\n"; };
+      ws.onmessage = (e) => { output.innerHTML += "SERVER: " + e.data + "\n"; };
+      ws.onclose = () => { output.innerHTML += "STATUS: [closed]"; };
+      function chat() { ws.send(input.value); input.value = ""; }
+    </script>
+  </body>
+</html>
