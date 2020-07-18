@@ -50,7 +50,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 
 	// infinite loop listening for new messages sent to the WebSocket
 	for {
-		_, msg, _ := conn.ReadMessage()
+		_, msg, err := conn.ReadMessage()
 		if err != nil {
 			log.Printf("error: %v", err)
 			delete(clients, conn)
